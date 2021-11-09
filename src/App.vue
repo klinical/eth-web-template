@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Rabl, powered by Ethereum"/>
   </div>
 </template>
 
 <script>
+import Web3 from 'web3'
 import HelloWorld from './components/HelloWorld.vue'
+import detectEthereumProvider from '@metamask/detect-provider'
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  async mounted() {
+    const provider = await detectEthereumProvider();
+
+    if (provider) {
+      const web3 = new Web3(provider)
+
+      this.$store.commit('set_address', web3)
+
+      try {
+        await provider.request({ method: "eth_requestAccounts" })
+      } catch ( e ) {
+        console.log(e)
+      }
+    } else {
+      console.log("MetaMask and a valid Ethereum wallet are required to use this website.")
+    }
   }
 }
 </script>
