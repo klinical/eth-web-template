@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
+    "@truffle/hdwallet-provider": "^1.6.0",
     "@types/vue-router": "^2.0.0",
+    "arb-ethers-web3-bridge": "^0.7.3",
     "core-js": "^3.6.5",
+    "dotenv": "^10.0.0",
     "module": "^1.2.5",
     "require-from-string": "^2.0.2",
     "vue": "^2.6.11",
